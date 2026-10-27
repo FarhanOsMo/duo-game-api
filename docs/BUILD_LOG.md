@@ -165,8 +165,9 @@ is redirected to a file.
 
 **Resolution.** The hook normalised the file to LF, and `.gitattributes`
 (`* text=auto eol=lf`) already guaranteed the committed copy was LF, which is
-why `git diff` showed no change. Generated files in this repo are now written
-with explicit `newline="\n"`.
+why `git diff` showed no change. The repo's own scripts that write files
+(`build_manifest.py`, `import_studio_export.py`) pass `newline="\n"`
+explicitly, so they produce identical bytes on every OS.
 
 ### Local pre-commit hooks depended on the active shell
 The data-validation hooks first used `language: system`, so they ran whatever
@@ -185,3 +186,36 @@ actionlint 1.7.12 (clean), gitleaks 8.30.1 over the git history (no leaks),
 Trivy 0.76.1 against the built image (exit 0 under the CI policy), pip-audit
 (no known vulnerabilities) and all pre-commit hooks. The GitHub-only parts
 (GHCR push, environments, approval gate) are verified on the first real run.
+
+## P6: load test
+
+### The first saturation point was a single worker, not the code
+Under light traffic (about 30 requests per second from
+`scripts/generate_traffic.py`) the server-side p95 on the Grafana dashboard
+was 4.67 ms. The Locust run (50 users, 60 s) pushed about 279 requests per
+second with zero failures, but server-side p95 rose to 96.8 ms and p99 to
+212.7 ms. Every endpoint is in-memory, so the time was spent queueing: the
+container runs one Uvicorn process, and Python executes one request's CPU
+work at a time in that process.
+
+**Resolution.** Recorded as a measured capacity figure rather than tuned away,
+because 280 requests per second on a laptop is far beyond a balance tool's
+needs. The README states it with the machine and command, the 250 ms p95
+alert threshold was confirmed to sit above this worst case, and horizontal
+scaling (more workers or replicas, which a stateless service allows) is in
+the improvement plan.
+
+## P6: documentation and the portfolio PDF
+
+### The architecture diagram would not lay out
+A PDF cannot render Mermaid, so the README diagram was rendered to PNG with
+`minlag/mermaid-cli`. The first version was a single left-to-right chain about
+13 nodes wide, unreadable at page width. Splitting it into three stages with
+`direction LR` inside each produced a single tall column instead: Mermaid
+ignores a subgraph's `direction` whenever an edge links a node inside it to a
+node outside it, and the long stage titles were also truncated.
+
+**Resolution.** Edges now connect whole stages (`Content --> Release -->
+Runtime`) rather than nodes across stages, and the titles were shortened.
+The same Mermaid source renders on GitHub and as `docs/images/architecture.png`
+for the PDF.

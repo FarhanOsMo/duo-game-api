@@ -28,6 +28,12 @@ disallow_untyped_defs = false
 disallow_incomplete_defs = false
 disallow_untyped_calls = false
 
+# PDF libraries come from requirements-docs.txt and ship no type stubs; CI type-checks
+# without installing them.
+[[tool.mypy.overrides]]
+module = ["markdown", "xhtml2pdf", "xhtml2pdf.*"]
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra --strict-markers"

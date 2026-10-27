@@ -27,3 +27,6 @@ loadtest/results/
 .idea/
 .DS_Store
 Thumbs.db
+
+# The portfolio PDF is a class upload built by scripts/build_pdf.py, not a repo artefact
+Mohamed_Farhan_Portfolio.pdf

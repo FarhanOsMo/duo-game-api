@@ -1,0 +1,3 @@
+# Only needed to build the portfolio PDF (scripts/build_pdf.py). Pure Python, no system libraries.
+Markdown==3.11.2
+xhtml2pdf==0.2.28
