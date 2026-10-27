@@ -1,0 +1,14 @@
+{
+  "description": "An ability uses an element missing from elements.json",
+  "file": "abilities.json",
+  "path": [
+    "ab_ram",
+    "element"
+  ],
+  "value": "Plasma",
+  "expect": {
+    "file": "abilities.json",
+    "entry_id": "ab_ram",
+    "message": "unknown element 'Plasma'"
+  }
+}

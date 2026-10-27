@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Local configuration: real values live in .env, the template is .env.example
+.env
+
+# Load test and traffic artefacts are regenerated on demand
+loadtest/results/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

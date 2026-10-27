@@ -1,0 +1,10 @@
+{
+  "description": "A truncated paste that is not valid JSON",
+  "file": "status_effects.json",
+  "raw": "{\n  \"Burn\": {\n",
+  "expect": {
+    "file": "status_effects.json",
+    "entry_id": "<file>",
+    "message": "invalid JSON"
+  }
+}

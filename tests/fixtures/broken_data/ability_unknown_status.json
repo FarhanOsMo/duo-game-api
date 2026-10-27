@@ -1,0 +1,16 @@
+{
+  "description": "An ability effect names an unknown status effect",
+  "file": "abilities.json",
+  "path": [
+    "ab_cinder_spit",
+    "effects",
+    0,
+    "status"
+  ],
+  "value": "Freeze",
+  "expect": {
+    "file": "abilities.json",
+    "entry_id": "ab_cinder_spit",
+    "message": "unknown status effect 'Freeze'"
+  }
+}

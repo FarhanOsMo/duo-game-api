@@ -1,0 +1,17 @@
+{
+  "description": "An encounter table entry names an unknown species",
+  "file": "encounter_tables.json",
+  "path": [
+    "Tables",
+    "meadow_field",
+    "entries",
+    0,
+    "species"
+  ],
+  "value": "mon_missing",
+  "expect": {
+    "file": "encounter_tables.json",
+    "entry_id": "meadow_field",
+    "message": "unknown species 'mon_missing'"
+  }
+}

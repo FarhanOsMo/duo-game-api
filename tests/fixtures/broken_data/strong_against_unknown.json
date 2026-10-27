@@ -1,0 +1,18 @@
+{
+  "description": "strongAgainst names an element that does not exist",
+  "file": "elements.json",
+  "path": [
+    "List",
+    "Fire",
+    "strongAgainst"
+  ],
+  "value": [
+    "Nature",
+    "Plasma"
+  ],
+  "expect": {
+    "file": "elements.json",
+    "entry_id": "Fire",
+    "message": "unknown strongAgainst element 'Plasma'"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "content_sha256": "da556585b19acb41bc8f7f888eb3baa09e8e2573d855cc7e1c501ebaae088549",
+  "data_version": "da556585b19a",
+  "files": {
+    "abilities.json": "769a784a2a7e7ea0aee075f9f5353ef09ce82632c7c462a35cba802965753bd3",
+    "config.json": "9b1ecf7f7de53dd18a5001e4575fdde8e1eda9e4b34b032438262816e6a61fc3",
+    "elements.json": "08c8cdae45913efaa17141c1d70cd595c3ffc16dc1fbf961e6748fbcc0f9d0c5",
+    "encounter_areas.json": "a8aa9cc1f4065a1d08fea3028bd5f981d531eb825a20888d6aecdc690c2b2d82",
+    "encounter_tables.json": "e5eb8611461174991365f91ea790a1a9f09394dd00b40d6399fc0f7c0c7740b9",
+    "essences.json": "159624f35e5cc1c128644065b2b7b3408598c7d43a7a2630fa3e8aa89370a784",
+    "items.json": "aae556fb80adf984116f39d98fc899ed998d86fb2cf0ddca146fc6634ae7b9e5",
+    "monsters.json": "c48ed557014e16f05769f443581d8d072fe53dbd4e6faf005a150e6c3290d151",
+    "personalities.json": "73dd2671c48ae6890102daa9c7ad7cc1604a198e621e00d7d9dee77648bf47c1",
+    "rarities.json": "a503489c33eb0b5afc93a78b51f160174894733dcab4b8e1cac30df40f77ed15",
+    "status_effects.json": "59011c96a5bc8939765d2f2a9f14e517f7a89348e0c7c37db5f9d70a7c3247be"
+  },
+  "schema_version": 1
+}

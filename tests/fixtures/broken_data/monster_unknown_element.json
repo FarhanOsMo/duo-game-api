@@ -1,0 +1,15 @@
+{
+  "description": "A monster uses an element missing from elements.json",
+  "file": "monsters.json",
+  "path": [
+    "List",
+    "mon_placeholder_a",
+    "element"
+  ],
+  "value": "Plasma",
+  "expect": {
+    "file": "monsters.json",
+    "entry_id": "mon_placeholder_a",
+    "message": "unknown element 'Plasma'"
+  }
+}

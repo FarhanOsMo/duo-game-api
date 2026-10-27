@@ -1,0 +1,15 @@
+{
+  "description": "An essence points at an ability that does not exist",
+  "file": "essences.json",
+  "path": [
+    "List",
+    "ess_placeholder_a",
+    "ability"
+  ],
+  "value": "ab_missing",
+  "expect": {
+    "file": "essences.json",
+    "entry_id": "ess_placeholder_a",
+    "message": "unknown ability 'ab_missing'"
+  }
+}

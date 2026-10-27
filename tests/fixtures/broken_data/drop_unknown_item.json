@@ -1,0 +1,17 @@
+{
+  "description": "A drop names an item missing from items.json",
+  "file": "monsters.json",
+  "path": [
+    "List",
+    "mon_placeholder_a",
+    "drops",
+    0,
+    "item"
+  ],
+  "value": "item_missing",
+  "expect": {
+    "file": "monsters.json",
+    "entry_id": "mon_placeholder_a",
+    "message": "unknown drop item 'item_missing'"
+  }
+}

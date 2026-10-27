@@ -1,0 +1,16 @@
+{
+  "description": "Schema check: a base stat that is not a number",
+  "file": "monsters.json",
+  "path": [
+    "List",
+    "mon_placeholder_a",
+    "baseStats",
+    "hp"
+  ],
+  "value": "lots",
+  "expect": {
+    "file": "monsters.json",
+    "entry_id": "mon_placeholder_a",
+    "message": "List.mon_placeholder_a.baseStats.hp"
+  }
+}

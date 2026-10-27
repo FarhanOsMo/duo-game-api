@@ -1,0 +1,15 @@
+{
+  "description": "An essence points at a species that does not exist",
+  "file": "essences.json",
+  "path": [
+    "List",
+    "ess_placeholder_a",
+    "species"
+  ],
+  "value": "mon_missing",
+  "expect": {
+    "file": "essences.json",
+    "entry_id": "ess_placeholder_a",
+    "message": "unknown species 'mon_missing'"
+  }
+}

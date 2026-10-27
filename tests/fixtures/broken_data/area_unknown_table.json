@@ -1,0 +1,15 @@
+{
+  "description": "An encounter area points at a table that does not exist",
+  "file": "encounter_areas.json",
+  "path": [
+    "Areas",
+    "OldMossgrove",
+    "tableId"
+  ],
+  "value": "table_missing",
+  "expect": {
+    "file": "encounter_areas.json",
+    "entry_id": "OldMossgrove",
+    "message": "unknown tableId 'table_missing'"
+  }
+}

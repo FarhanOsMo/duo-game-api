@@ -1,0 +1,40 @@
+# Tool configuration only. Dependencies live in requirements*.txt so a plain
+# `pip install -r requirements.txt` is enough to run the service.
+
+[project]
+name = "duo-game-api"
+version = "1.0.0"
+description = "Read-only companion API for the Lanternfall monster-taming game's exported data"
+requires-python = ">=3.12"
+license = "MIT"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "SIM", "RUF", "PT", "C4"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["^\\.venv/", "^loadtest/"]
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
