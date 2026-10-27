@@ -17,7 +17,9 @@ from typing import Any
 request_id_var: ContextVar[str] = ContextVar("request_id", default="-")
 
 # Attributes every LogRecord has; anything else was passed via `extra=` and is logged.
-_STANDARD_ATTRS = set(logging.makeLogRecord({}).__dict__) | {"message", "asctime"}
+# Uvicorn also attaches `color_message` (the message with terminal colour codes),
+# which is noise in a JSON log pipeline, so it is dropped too.
+_STANDARD_ATTRS = set(logging.makeLogRecord({}).__dict__) | {"message", "asctime", "color_message"}
 
 
 class JsonFormatter(logging.Formatter):
