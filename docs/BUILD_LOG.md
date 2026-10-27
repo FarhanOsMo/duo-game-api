@@ -62,3 +62,34 @@ version of the tool. The provided file must not be edited.
 **Resolution.** Flagged to the project owner to replace the file with the
 version used in Studio. The importer refuses output that has no character
 counts and says why, rather than accepting a copy it cannot verify.
+
+## P2: domain formulas
+
+All Appendix B golden values passed on the first run. mypy strict flagged
+`(level - 1) ** exponent`: `int ** float` is typed as returning `Any` (a
+negative base could produce a complex number), which leaked `Any` out of a
+function declared to return `int`.
+
+**Resolution.** Switched to `math.pow(level - 1, exponent)`, which is typed
+`float` and is the same operation as Lua's `^` for the non-negative bases the
+formula uses. The golden values confirmed the results did not change.
+
+## P3: API
+
+### TestClient deprecation warning
+With FastAPI 0.162 / Starlette 1.10 every test run printed
+`StarletteDeprecationWarning: Using httpx with starlette.testclient is
+deprecated; install httpx2 instead.` Silencing the warning would have hidden a
+future breakage.
+
+**Resolution.** Replaced `httpx` with `httpx2` in `requirements-dev.txt`,
+uninstalled `httpx`, confirmed `pip check` was clean and the full suite
+(132 tests) passed with no warnings.
+
+### Unknown element names: game semantics versus API usability
+The game's `getMultiplier` returns 1.0 for an unknown element. Over HTTP that
+would turn a typo (`?attack=Fier`) into a plausible but wrong answer.
+
+**Resolution.** The pure domain function keeps the game's behaviour (and is
+tested for it), while `/elements/effectiveness` returns a 404 for names not in
+`elements.json`. The decision is commented in `app/api/compute.py`.

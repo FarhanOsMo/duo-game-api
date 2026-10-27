@@ -39,3 +39,5 @@ branch = true
 [tool.coverage.report]
 show_missing = true
 skip_covered = true
+# Measured at 98% when set; the gate leaves a little headroom without letting coverage rot.
+fail_under = 95
