@@ -5,7 +5,7 @@ wrapped in the delivery pipeline a live-service game team would run: validated
 content deployments, container builds with security gates, environment
 promotion with an approval step, and observability as code.
 
-![CI](https://github.com/<your-username>/duo-game-api/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/FarhanOsMo/duo-game-api/actions/workflows/ci.yml/badge.svg)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
@@ -14,7 +14,7 @@ promotion with an approval step, and observability as code.
 Requires Docker Desktop (or Docker Engine with Compose v2).
 
 ```bash
-git clone https://github.com/<your-username>/duo-game-api.git
+git clone https://github.com/FarhanOsMo/duo-game-api.git
 cd duo-game-api
 docker compose up -d --build
 ```

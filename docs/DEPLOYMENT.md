@@ -48,14 +48,14 @@ Locally, the same environments are one command each:
 ```bash
 docker compose up -d --build                                            # dev
 docker compose -f docker-compose.yml -f compose.staging.yml up -d       # staging
-API_IMAGE=ghcr.io/<your-username>/duo-game-api:1.0.0 \
+API_IMAGE=ghcr.io/farhanosmo/duo-game-api:1.0.0 \
   docker compose -f docker-compose.yml -f compose.prod.yml up -d --no-build   # prod-like
 ```
 
 PowerShell for the prod-like line:
 
 ```powershell
-$env:API_IMAGE = "ghcr.io/<your-username>/duo-game-api:1.0.0"
+$env:API_IMAGE = "ghcr.io/farhanosmo/duo-game-api:1.0.0"
 docker compose -f docker-compose.yml -f compose.prod.yml up -d --no-build
 ```
 
@@ -68,7 +68,7 @@ The service is stateless and every release is an immutable image, so
 rollback is redeploying the previous version:
 
 ```bash
-API_IMAGE=ghcr.io/<your-username>/duo-game-api:<previous-version> \
+API_IMAGE=ghcr.io/farhanosmo/duo-game-api:<previous-version> \
   docker compose -f docker-compose.yml -f compose.prod.yml up -d --no-build
 ```
 
