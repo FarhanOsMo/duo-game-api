@@ -219,3 +219,25 @@ node outside it, and the long stage titles were also truncated.
 Runtime`) rather than nodes across stages, and the titles were shortened.
 The same Mermaid source renders on GitHub and as `docs/images/architecture.png`
 for the PDF.
+
+## P7: final review
+
+### A log filter hid two Grafana errors
+Checking Grafana's logs earlier, I filtered out lines mentioning "plugin" to
+cut through startup noise. The final fresh-clone run, checked without that
+filter, showed two real errors: a missing `provisioning/plugins` folder, and
+Grafana 13 failing to auto-install a bundled Elasticsearch plugin
+(`permission denied`).
+
+**Resolution.** Added the plugins provisioning folder (with a README, like the
+alerting one) and set `GF_PLUGINS_PREINSTALL_DISABLED=true`, since the
+dashboard uses only core panels and the stack should not need the internet to
+start. A clean start now logs zero error lines. Lesson recorded: verify a
+"clean" result with the broadest check, not a filtered one.
+
+### Uvicorn's colour codes in JSON logs
+Running the API outside Docker showed uvicorn attaching a `color_message`
+field containing terminal escape codes to every startup log line.
+
+**Resolution.** The JSON formatter now drops `color_message`; the plain
+`message` field already carries the same text.
