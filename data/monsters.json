@@ -1,0 +1,264 @@
+{
+  "List": {
+    "mon_placeholder_a": {
+      "baseStats": {
+        "attack": 14,
+        "defense": 9,
+        "hp": 34,
+        "magic": 11,
+        "mp": 12,
+        "speed": 12
+      },
+      "battleAI": "Default",
+      "displayName": "Placeholder A",
+      "drops": [
+        {
+          "chance": 0.25,
+          "item": "treat_crunchy_biscuit",
+          "max": 1,
+          "min": 1
+        }
+      ],
+      "element": "Fire",
+      "essence": "ess_placeholder_a",
+      "family": "Beast",
+      "genderRates": {
+        "Female": 50,
+        "Male": 50
+      },
+      "growth": {
+        "attack": 0.09,
+        "defense": 0.07,
+        "hp": 0.09,
+        "magic": 0.08,
+        "mp": 0.07,
+        "speed": 0.08
+      },
+      "habitats": [
+        "Grassland"
+      ],
+      "learnset": [
+        {
+          "ability": "ab_ram",
+          "level": 1
+        },
+        {
+          "ability": "ab_cinder_spit",
+          "level": 3
+        },
+        {
+          "ability": "ab_harden",
+          "level": 6
+        }
+      ],
+      "lore": "Placeholder - awaiting design.",
+      "model": {
+        "modelId": "mon_placeholder_a",
+        "placeholder": {
+          "size": 3.2
+        },
+        "scale": 1
+      },
+      "overworld": {
+        "profile": "Wanderer",
+        "runSpeed": 18,
+        "sightRange": 30,
+        "walkSpeed": 10
+      },
+      "personalities": {
+        "Brave": 3,
+        "Curious": 2,
+        "Lazy": 1
+      },
+      "rarityTier": "Common",
+      "recruitment": {
+        "baseChance": 0.14,
+        "dislikes": [
+          "Leafy"
+        ],
+        "favoriteTreat": "treat_ember_pepper",
+        "likes": [
+          "Spicy",
+          "Savory"
+        ],
+        "lowHpBonus": 1.6
+      },
+      "rewards": {
+        "exp": 14,
+        "gold": 8
+      }
+    },
+    "mon_placeholder_b": {
+      "baseStats": {
+        "attack": 10,
+        "defense": 11,
+        "hp": 38,
+        "magic": 13,
+        "mp": 16,
+        "speed": 9
+      },
+      "battleAI": "Default",
+      "displayName": "Placeholder B",
+      "drops": [
+        {
+          "chance": 0.2,
+          "item": "item_healing_herb",
+          "max": 1,
+          "min": 1
+        }
+      ],
+      "element": "Water",
+      "essence": "ess_placeholder_b",
+      "family": "Aquatic",
+      "genderRates": {
+        "Female": 50,
+        "Male": 50
+      },
+      "growth": {
+        "attack": 0.07,
+        "defense": 0.08,
+        "hp": 0.1,
+        "magic": 0.09,
+        "mp": 0.08,
+        "speed": 0.06
+      },
+      "habitats": [
+        "Grassland"
+      ],
+      "learnset": [
+        {
+          "ability": "ab_ram",
+          "level": 1
+        },
+        {
+          "ability": "ab_tide_pulse",
+          "level": 3
+        },
+        {
+          "ability": "ab_harden",
+          "level": 5
+        }
+      ],
+      "lore": "Placeholder - awaiting design.",
+      "model": {
+        "modelId": "mon_placeholder_b",
+        "placeholder": {
+          "size": 3
+        },
+        "scale": 1
+      },
+      "overworld": {
+        "profile": "Wanderer",
+        "runSpeed": 14,
+        "sightRange": 24,
+        "walkSpeed": 8
+      },
+      "personalities": {
+        "Curious": 2,
+        "Lazy": 3,
+        "Timid": 1
+      },
+      "rarityTier": "Common",
+      "recruitment": {
+        "baseChance": 0.15,
+        "dislikes": [
+          "Spicy"
+        ],
+        "favoriteTreat": "treat_smoked_minnow",
+        "likes": [
+          "Fishy"
+        ],
+        "lowHpBonus": 1.4
+      },
+      "rewards": {
+        "exp": 15,
+        "gold": 9
+      }
+    },
+    "mon_placeholder_c": {
+      "baseStats": {
+        "attack": 12,
+        "defense": 10,
+        "hp": 32,
+        "magic": 14,
+        "mp": 18,
+        "speed": 10
+      },
+      "battleAI": "Default",
+      "displayName": "Placeholder C",
+      "drops": [
+        {
+          "chance": 0.2,
+          "item": "treat_dewleaf_bundle",
+          "max": 2,
+          "min": 1
+        }
+      ],
+      "element": "Nature",
+      "essence": "ess_placeholder_c",
+      "family": "Flora",
+      "genderRates": {
+        "Female": 50,
+        "Male": 50
+      },
+      "growth": {
+        "attack": 0.08,
+        "defense": 0.07,
+        "hp": 0.08,
+        "magic": 0.1,
+        "mp": 0.09,
+        "speed": 0.07
+      },
+      "habitats": [
+        "Grassland"
+      ],
+      "learnset": [
+        {
+          "ability": "ab_thorn_lash",
+          "level": 1
+        },
+        {
+          "ability": "ab_harden",
+          "level": 4
+        }
+      ],
+      "lore": "Placeholder - awaiting design.",
+      "model": {
+        "modelId": "mon_placeholder_c",
+        "placeholder": {
+          "size": 2.8
+        },
+        "scale": 1
+      },
+      "overworld": {
+        "profile": "Skittish",
+        "runSpeed": 14,
+        "sightRange": 22,
+        "walkSpeed": 7
+      },
+      "personalities": {
+        "Curious": 2,
+        "Lazy": 1,
+        "Timid": 3
+      },
+      "rarityTier": "Uncommon",
+      "recruitment": {
+        "baseChance": 0.11,
+        "dislikes": [
+          "Spicy",
+          "Fishy"
+        ],
+        "favoriteTreat": "treat_dewleaf_bundle",
+        "likes": [
+          "Leafy"
+        ],
+        "lowHpBonus": 1.3,
+        "minAttempts": 1
+      },
+      "rewards": {
+        "exp": 18,
+        "gold": 10
+      }
+    }
+  }
+}

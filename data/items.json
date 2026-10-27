@@ -1,0 +1,111 @@
+{
+  "Flavors": [
+    "Savory",
+    "Spicy",
+    "Fishy",
+    "Leafy"
+  ],
+  "List": {
+    "item_healing_herb": {
+      "category": "Consumable",
+      "description": "Restores 40 HP to one monster.",
+      "name": "Healing Herb",
+      "price": 12,
+      "rarity": "Common",
+      "usableIn": {
+        "Battle": true,
+        "Field": true
+      },
+      "use": {
+        "amount": 40,
+        "type": "HealHP"
+      }
+    },
+    "item_mana_berry": {
+      "category": "Consumable",
+      "description": "Restores 15 MP to one monster.",
+      "name": "Mana Berry",
+      "price": 30,
+      "rarity": "Uncommon",
+      "usableIn": {
+        "Battle": true,
+        "Field": true
+      },
+      "use": {
+        "amount": 15,
+        "type": "HealMP"
+      }
+    },
+    "key_roller_skates": {
+      "category": "Key",
+      "description": "Lanternfall-made skates with brass wheels. Put them on with your Roller Skates key (R) and glide - skating never tires you.",
+      "name": "Roller Skates",
+      "price": 700,
+      "rarity": "Rare",
+      "unique": true
+    },
+    "treat_crunchy_biscuit": {
+      "category": "Treat",
+      "description": "A plain baked treat most monsters will at least sniff.",
+      "flavors": [
+        "Savory"
+      ],
+      "name": "Crunchy Biscuit",
+      "price": 10,
+      "rarity": "Common",
+      "treatPower": 1
+    },
+    "treat_dewleaf_bundle": {
+      "category": "Treat",
+      "description": "Fresh greens still wet with morning dew.",
+      "flavors": [
+        "Leafy"
+      ],
+      "name": "Dewleaf Bundle",
+      "price": 30,
+      "rarity": "Uncommon",
+      "treatPower": 1.2
+    },
+    "treat_ember_pepper": {
+      "category": "Treat",
+      "description": "Painfully hot. Some monsters adore it.",
+      "elementBonus": {
+        "Fire": 1.1
+      },
+      "flavors": [
+        "Spicy"
+      ],
+      "name": "Ember Pepper",
+      "price": 30,
+      "rarity": "Uncommon",
+      "treatPower": 1.2
+    },
+    "treat_smoked_minnow": {
+      "category": "Treat",
+      "description": "A salty little fish.",
+      "flavors": [
+        "Fishy",
+        "Savory"
+      ],
+      "name": "Smoked Minnow",
+      "price": 30,
+      "rarity": "Uncommon",
+      "treatPower": 1.2
+    }
+  },
+  "Rarity": {
+    "Common": {
+      "name": "Common",
+      "order": 1
+    },
+    "Rare": {
+      "name": "Rare",
+      "order": 3
+    },
+    "Uncommon": {
+      "name": "Uncommon",
+      "order": 2
+    }
+  },
+  "SellRatio": 0.5
+}

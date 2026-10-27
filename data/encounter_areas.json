@@ -1,0 +1,35 @@
+{
+  "Areas": {
+    "Lanternfall": {
+      "encounterEnabled": false
+    },
+    "OldMossgrove": {
+      "baseChance": 0.003,
+      "encounterEnabled": true,
+      "tableId": "grove_undergrowth"
+    },
+    "RootboundDepths": {
+      "baseChance": 0.008,
+      "encounterEnabled": true,
+      "tableId": "dungeon_1"
+    },
+    "RootboundHollow": {
+      "baseChance": 0.003,
+      "encounterEnabled": true,
+      "tableId": "grove_undergrowth"
+    },
+    "SilverrunCrossing": {
+      "baseChance": 0.0015,
+      "encounterEnabled": true,
+      "tableId": "meadow_field"
+    },
+    "WhistlewindMeadow": {
+      "baseChance": 0.0025,
+      "encounterEnabled": true,
+      "tableId": "meadow_field"
+    }
+  },
+  "Default": {
+    "encounterEnabled": false
+  }
+}

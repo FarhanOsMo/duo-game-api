@@ -1,0 +1,143 @@
+{
+  "Brave": {
+    "animationTag": "Bold",
+    "battleAI": {
+      "ability": 2,
+      "attack": 3,
+      "defend": 0.5
+    },
+    "description": "Charges into danger without hesitation.",
+    "name": "Brave",
+    "overworldAI": {
+      "aggression": 1.4,
+      "fleeThreshold": 0.1
+    },
+    "recruit": {
+      "baseMod": 0.9,
+      "failReactions": {
+        "Angry": 2,
+        "Annoyed": 3,
+        "Refuses": 1,
+        "Unimpressed": 1
+      },
+      "reactionBias": [
+        "Suspicious"
+      ],
+      "repeatBonus": 0,
+      "retaliate": 0.5,
+      "weakenedBonus": 1.5
+    },
+    "statMods": {
+      "attack": 1.1,
+      "speed": 0.95
+    }
+  },
+  "Curious": {
+    "animationTag": "Alert",
+    "battleAI": {
+      "ability": 2.5,
+      "attack": 1.5,
+      "defend": 0.5
+    },
+    "description": "Can't resist investigating anything new.",
+    "name": "Curious",
+    "overworldAI": {
+      "aggression": 0.6,
+      "fleeThreshold": 0.3,
+      "investigates": true
+    },
+    "recruit": {
+      "baseMod": 1.2,
+      "failReactions": {
+        "Confused": 1,
+        "Curious": 3,
+        "Interested": 2,
+        "Unsure": 1
+      },
+      "preferenceMods": {
+        "Neutral": 1.15
+      },
+      "reactionBias": [
+        "Curious",
+        "Interested"
+      ],
+      "repeatBonus": 0.03,
+      "retaliate": 0.2,
+      "weakenedBonus": 1
+    },
+    "statMods": {
+      "defense": 0.95,
+      "magic": 1.08
+    }
+  },
+  "Lazy": {
+    "animationTag": "Sleepy",
+    "battleAI": {
+      "ability": 0.8,
+      "attack": 1.5,
+      "defend": 1.5,
+      "idle": 0.5
+    },
+    "description": "Would rather nap than fight.",
+    "name": "Lazy",
+    "overworldAI": {
+      "aggression": 0.4,
+      "fleeThreshold": 0.3
+    },
+    "recruit": {
+      "baseMod": 1.1,
+      "failReactions": {
+        "Comfortable": 1,
+        "Confused": 1,
+        "Indifferent": 4
+      },
+      "reactionBias": [
+        "Indifferent"
+      ],
+      "repeatBonus": 0.05,
+      "retaliate": 0.15,
+      "weakenedBonus": 1
+    },
+    "statMods": {
+      "hp": 1.08,
+      "speed": 0.9
+    }
+  },
+  "Timid": {
+    "animationTag": "Shy",
+    "battleAI": {
+      "ability": 1.5,
+      "attack": 1,
+      "defend": 2
+    },
+    "description": "Easily startled; wary of strangers.",
+    "name": "Timid",
+    "overworldAI": {
+      "aggression": 0.3,
+      "fleeThreshold": 0.6
+    },
+    "recruit": {
+      "baseMod": 0.85,
+      "failReactions": {
+        "Curious": 1,
+        "Refuses": 2,
+        "Suspicious": 3,
+        "Unsure": 2
+      },
+      "preferenceMods": {
+        "Disliked": 0.8
+      },
+      "reactionBias": [
+        "Suspicious",
+        "Curious"
+      ],
+      "repeatBonus": 0.04,
+      "retaliate": 0.1,
+      "weakenedBonus": 1.2
+    },
+    "statMods": {
+      "attack": 0.9,
+      "speed": 1.1
+    }
+  }
+}

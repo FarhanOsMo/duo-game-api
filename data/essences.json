@@ -1,0 +1,46 @@
+{
+  "List": {
+    "ess_placeholder_a": {
+      "ability": "ess_ab_ember_burst",
+      "description": "Smoulders with a restless warmth.",
+      "dropChance": 0.1,
+      "glyph": "A",
+      "name": "Essence of Placeholder A",
+      "species": "mon_placeholder_a",
+      "upgradeCost": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "ess_placeholder_b": {
+      "ability": "ess_ab_soothing_rain",
+      "description": "Cool to the touch, like river water.",
+      "dropChance": 0.1,
+      "glyph": "B",
+      "name": "Essence of Placeholder B",
+      "species": "mon_placeholder_b",
+      "upgradeCost": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "ess_placeholder_c": {
+      "ability": "ess_ab_verdant_sense",
+      "description": "Smells faintly of turned soil.",
+      "dropChance": 0.12,
+      "glyph": "C",
+      "name": "Essence of Placeholder C",
+      "species": "mon_placeholder_c",
+      "upgradeCost": [
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "List": {
+    "Dark": {
+      "name": "Dark",
+      "strongAgainst": [
+        "Light"
+      ]
+    },
+    "Earth": {
+      "name": "Earth",
+      "strongAgainst": [
+        "Lightning",
+        "Fire"
+      ]
+    },
+    "Fire": {
+      "name": "Fire",
+      "strongAgainst": [
+        "Nature",
+        "Ice"
+      ]
+    },
+    "Ice": {
+      "name": "Ice",
+      "strongAgainst": [
+        "Wind",
+        "Nature"
+      ]
+    },
+    "Light": {
+      "name": "Light",
+      "strongAgainst": [
+        "Dark"
+      ]
+    },
+    "Lightning": {
+      "name": "Lightning",
+      "strongAgainst": [
+        "Water",
+        "Wind"
+      ]
+    },
+    "Nature": {
+      "name": "Nature",
+      "strongAgainst": [
+        "Water",
+        "Earth"
+      ]
+    },
+    "Neutral": {
+      "name": "Neutral",
+      "strongAgainst": []
+    },
+    "Water": {
+      "name": "Water",
+      "strongAgainst": [
+        "Fire",
+        "Earth"
+      ]
+    },
+    "Wind": {
+      "name": "Wind",
+      "strongAgainst": [
+        "Nature"
+      ]
+    }
+  },
+  "Multipliers": {
+    "Neutral": 1,
+    "Resisted": 0.67,
+    "Strong": 1.5
+  }
+}

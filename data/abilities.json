@@ -1,0 +1,135 @@
+{
+  "ab_cinder_spit": {
+    "accuracy": 0.95,
+    "category": "Magical",
+    "description": "Spits hot cinders. May burn.",
+    "effects": [
+      {
+        "chance": 0.15,
+        "status": "Burn",
+        "type": "Status"
+      }
+    ],
+    "element": "Fire",
+    "kind": "Battle",
+    "mpCost": 3,
+    "name": "Cinder Spit",
+    "power": 40,
+    "source": "Monster",
+    "target": "SingleEnemy"
+  },
+  "ab_harden": {
+    "accuracy": 1,
+    "category": "Support",
+    "description": "Tenses up to raise Defense.",
+    "effects": [
+      {
+        "stages": 1,
+        "stat": "defense",
+        "type": "StatStage"
+      }
+    ],
+    "element": "Neutral",
+    "kind": "Battle",
+    "mpCost": 2,
+    "name": "Harden",
+    "power": 0,
+    "source": "Monster",
+    "target": "Self"
+  },
+  "ab_ram": {
+    "accuracy": 0.95,
+    "category": "Physical",
+    "description": "A plain but sturdy body blow.",
+    "element": "Neutral",
+    "kind": "Battle",
+    "mpCost": 0,
+    "name": "Ram",
+    "power": 30,
+    "source": "Monster",
+    "target": "SingleEnemy"
+  },
+  "ab_thorn_lash": {
+    "accuracy": 0.95,
+    "category": "Physical",
+    "description": "Whips with thorny tendrils. May poison.",
+    "effects": [
+      {
+        "chance": 0.2,
+        "status": "Poison",
+        "type": "Status"
+      }
+    ],
+    "element": "Nature",
+    "kind": "Battle",
+    "mpCost": 2,
+    "name": "Thorn Lash",
+    "power": 38,
+    "source": "Monster",
+    "target": "SingleEnemy"
+  },
+  "ab_tide_pulse": {
+    "accuracy": 0.95,
+    "category": "Magical",
+    "description": "A pulse of pressurised water.",
+    "element": "Water",
+    "kind": "Battle",
+    "mpCost": 3,
+    "name": "Tide Pulse",
+    "power": 42,
+    "source": "Monster",
+    "target": "SingleEnemy"
+  },
+  "ess_ab_ember_burst": {
+    "accuracy": 1,
+    "category": "Magical",
+    "description": "Unleash stored heat on every foe.",
+    "element": "Fire",
+    "kind": "Battle",
+    "mpCost": 3,
+    "name": "Ember Burst",
+    "perLevel": {
+      "power": 6
+    },
+    "power": 30,
+    "source": "Essence",
+    "target": "AllEnemies"
+  },
+  "ess_ab_soothing_rain": {
+    "accuracy": 1,
+    "category": "Heal",
+    "description": "A gentle rain heals your whole party.",
+    "effects": [
+      {
+        "scale": "flat",
+        "type": "Heal"
+      }
+    ],
+    "element": "Water",
+    "kind": "Battle",
+    "mpCost": 3,
+    "name": "Soothing Rain",
+    "perLevel": {
+      "power": 5
+    },
+    "power": 20,
+    "source": "Essence",
+    "target": "AllAllies"
+  },
+  "ess_ab_verdant_sense": {
+    "cooldown": 8,
+    "description": "Reveals hidden paths, overgrown passages and buried treasure nearby.",
+    "fieldAction": "RevealHidden",
+    "kind": "Field",
+    "name": "Verdant Sense",
+    "params": {
+      "duration": 15,
+      "radius": 40,
+      "tag": "Hidden_Verdant"
+    },
+    "perLevel": {
+      "radius": 8
+    },
+    "source": "Essence"
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "battle": {
+    "ActivePerSide": 1,
+    "Arena": {
+      "Reserve": 340
+    },
+    "Damage": {
+      "AttackWeight": 0.9,
+      "CritChance": 0.0625,
+      "CritMultiplier": 1.5,
+      "DefendMultiplier": 0.5,
+      "DefenseWeight": 0.35,
+      "MagicDefenseBlend": 0.5,
+      "PowerScale": 30,
+      "Variance": [
+        0.85,
+        1
+      ]
+    },
+    "Defeat": {
+      "GoldLossPercent": 10,
+      "RespawnMarker": "Square"
+    },
+    "Essence": {
+      "AllowedKinds": {
+        "Boss": true,
+        "Tamer": true,
+        "Wild": true
+      },
+      "Caster": {
+        "Base": {
+          "attack": 10,
+          "defense": 10,
+          "hp": 1,
+          "magic": 14,
+          "mp": 0,
+          "speed": 10
+        },
+        "Name": "You",
+        "PerLevel": {
+          "attack": 1,
+          "defense": 1,
+          "magic": 1.4,
+          "speed": 1
+        }
+      },
+      "DropChanceMult": 1,
+      "DropKinds": {
+        "Wild": true
+      },
+      "Enabled": true,
+      "PityAfter": 0,
+      "Priority": 3
+    },
+    "ItemPriority": 6,
+    "MaxTurns": 99,
+    "Rewards": {
+      "BenchExpShare": 0.5,
+      "ExpFlat": 4,
+      "ExpLevelFactor": 0.6,
+      "GoldLevelFactor": 0.1
+    },
+    "Run": {
+      "Base": 0.55,
+      "Max": 0.95,
+      "Min": 0.2,
+      "PerAttempt": 0.12,
+      "SpeedFactor": 0.02
+    },
+    "Scouting": {
+      "AllowedKinds": {
+        "Wild": true
+      },
+      "Enabled": true
+    },
+    "Stages": {
+      "Max": 3,
+      "Min": -3,
+      "Step": 0.25
+    },
+    "Timeouts": {
+      "CommandSeconds": 300
+    },
+    "Transition": {
+      "EndedWaitSeconds": 4,
+      "EnterHoldSeconds": 0.9,
+      "ExitHoldSeconds": 2.2,
+      "FadeInSeconds": 0.25,
+      "FadeOutSeconds": 0.45
+    },
+    "UI": {
+      "ConfirmTargets": true,
+      "OpenLastBranch": false
+    },
+    "WildStatMultiplier": {
+      "attack": 0.85,
+      "defense": 0.85,
+      "hp": 0.8,
+      "magic": 0.85,
+      "mp": 1,
+      "speed": 1
+    }
+  },
+  "game": {
+    "Essence": {
+      "LoadoutSlots": {
+        "Battle": 2,
+        "Field": 2,
+        "Passive": 1
+      },
+      "MaxAbilityLevel": 5
+    },
+    "Experience": {
+      "Base": 12,
+      "Exponent": 2.25
+    },
+    "Inventory": {
+      "MaxGold": 9999999,
+      "MaxStack": 99,
+      "StartingGold": 100,
+      "StartingItems": {
+        "item_healing_herb": 3,
+        "treat_crunchy_biscuit": 5
+      }
+    },
+    "Monster": {
+      "MaxEquippedAbilities": 4,
+      "MaxLevel": 50,
+      "PotentialMax": 15,
+      "StatKeys": [
+        "hp",
+        "mp",
+        "attack",
+        "defense",
+        "magic",
+        "speed"
+      ]
+    },
+    "NPC": {
+      "TalkRange": 14
+    },
+    "Party": {
+      "ActiveSlots": 3,
+      "NicknameMaxLength": 16,
+      "StorageCapacity": 150
+    },
+    "Spirit": {
+      "Max": 10,
+      "RegenAmount": 1,
+      "RegenEverySeconds": 8,
+      "RegenInBattle": false
+    },
+    "Starter": {
+      "AutoGrant": false,
+      "Flag": "starter_party_granted",
+      "Monsters": [
+        {
+          "level": 5,
+          "species": "mon_placeholder_a"
+        },
+        {
+          "level": 5,
+          "species": "mon_placeholder_b"
+        }
+      ]
+    },
+    "World": {
+      "DayCycle": {
+        "Enabled": true,
+        "MinutesPerDay": 24
+      }
+    }
+  }
+}

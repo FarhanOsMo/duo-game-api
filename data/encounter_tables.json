@@ -1,0 +1,229 @@
+{
+  "RarityWeights": {
+    "Common": 40,
+    "Rare": 5,
+    "Uncommon": 15,
+    "VeryRare": 1
+  },
+  "Tables": {
+    "dungeon_1": {
+      "arena": "Dungeon",
+      "entries": [
+        {
+          "level": [
+            7,
+            9
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_c"
+        },
+        {
+          "level": [
+            7,
+            9
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_a"
+        },
+        {
+          "level": [
+            7,
+            9
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_b"
+        },
+        {
+          "level": [
+            10,
+            11
+          ],
+          "rarity": "Rare",
+          "species": "mon_placeholder_c"
+        }
+      ],
+      "name": "Rootbound Hollow - Depths",
+      "rate": 1
+    },
+    "grove_hollow": {
+      "arena": "Forest",
+      "entries": [
+        {
+          "level": [
+            5,
+            7
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_c"
+        },
+        {
+          "level": [
+            5,
+            7
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_b"
+        },
+        {
+          "level": [
+            9,
+            10
+          ],
+          "rarity": "VeryRare",
+          "species": "mon_placeholder_a"
+        },
+        {
+          "conditions": {
+            "weather": "Rain"
+          },
+          "level": [
+            8,
+            9
+          ],
+          "rarity": "Rare",
+          "species": "mon_placeholder_b"
+        }
+      ],
+      "name": "Old Mossgrove - Fern Hollow",
+      "rate": 0.9
+    },
+    "grove_undergrowth": {
+      "arena": "Forest",
+      "entries": [
+        {
+          "level": [
+            4,
+            6
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_c"
+        },
+        {
+          "level": [
+            4,
+            6
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_a"
+        },
+        {
+          "level": [
+            4,
+            6
+          ],
+          "rarity": "Rare",
+          "species": "mon_placeholder_b"
+        },
+        {
+          "conditions": {
+            "timeOfDay": [
+              "Dusk",
+              "Night"
+            ]
+          },
+          "level": [
+            7,
+            8
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_c"
+        }
+      ],
+      "name": "Old Mossgrove - Undergrowth",
+      "rate": 1
+    },
+    "meadow_field": {
+      "arena": "Meadow",
+      "entries": [
+        {
+          "level": [
+            2,
+            4
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_a"
+        },
+        {
+          "level": [
+            2,
+            4
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_b"
+        },
+        {
+          "level": [
+            3,
+            4
+          ],
+          "rarity": "Rare",
+          "species": "mon_placeholder_c"
+        }
+      ],
+      "name": "Whistlewind Meadow - Fields",
+      "rate": 1
+    },
+    "meadow_hill": {
+      "arena": "Meadow",
+      "entries": [
+        {
+          "level": [
+            3,
+            5
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_a"
+        },
+        {
+          "level": [
+            3,
+            5
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_b"
+        },
+        {
+          "level": [
+            4,
+            5
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_c"
+        }
+      ],
+      "name": "Whistlewind Meadow - Windmill Slopes",
+      "rate": 1.1
+    },
+    "meadow_pond": {
+      "arena": "Pond",
+      "entries": [
+        {
+          "level": [
+            2,
+            5
+          ],
+          "rarity": "Common",
+          "species": "mon_placeholder_b"
+        },
+        {
+          "level": [
+            3,
+            4
+          ],
+          "rarity": "Uncommon",
+          "species": "mon_placeholder_a"
+        },
+        {
+          "level": [
+            3,
+            5
+          ],
+          "rarity": "Rare",
+          "species": "mon_placeholder_c"
+        }
+      ],
+      "name": "Whistlewind Meadow - Pond Reeds",
+      "rate": 1
+    }
+  }
+}

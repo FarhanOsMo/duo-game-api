@@ -1,0 +1,32 @@
+{
+  "Common": {
+    "name": "Common",
+    "order": 1,
+    "scoutDifficulty": 1
+  },
+  "ExtremelyRare": {
+    "name": "Extremely Rare",
+    "order": 5,
+    "scoutDifficulty": 3.5
+  },
+  "Rare": {
+    "name": "Rare",
+    "order": 3,
+    "scoutDifficulty": 1.7
+  },
+  "Uncommon": {
+    "name": "Uncommon",
+    "order": 2,
+    "scoutDifficulty": 1.25
+  },
+  "Unique": {
+    "name": "Unique",
+    "order": 6,
+    "scoutDifficulty": 4.5
+  },
+  "VeryRare": {
+    "name": "Very Rare",
+    "order": 4,
+    "scoutDifficulty": 2.4
+  }
+}

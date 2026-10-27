@@ -1,0 +1,18 @@
+{
+  "Burn": {
+    "duration": [
+      3,
+      5
+    ],
+    "name": "Burn",
+    "statMods": {
+      "attack": 0.8
+    },
+    "tick": -0.06
+  },
+  "Poison": {
+    "name": "Poison",
+    "persistsAfterBattle": true,
+    "tick": -0.08
+  }
+}
