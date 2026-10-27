@@ -1,0 +1,21 @@
+# Prod-like override: runs a released image instead of building one, with prod
+# configuration and resource limits. Promotion means changing API_IMAGE to an
+# image that already passed CI and staging, never rebuilding it.
+# Usage:
+#   API_IMAGE=ghcr.io/<owner>/duo-game-api:1.0.0 \
+#   docker compose -f docker-compose.yml -f compose.prod.yml up -d --no-build
+services:
+  api:
+    env_file: !override
+      - env/prod.env
+    pull_policy: missing
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 256M
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

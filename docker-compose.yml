@@ -1,0 +1,68 @@
+# Local stack: API + Prometheus + Grafana. This file is the dev environment.
+# Staging and prod-like environments layer an override file on top of it and
+# run the SAME image with a different env file (see docs/DEPLOYMENT.md):
+#   docker compose up -d --build                                          # dev
+#   docker compose -f docker-compose.yml -f compose.staging.yml up -d     # staging
+#   docker compose -f docker-compose.yml -f compose.prod.yml up -d        # prod-like
+# Values such as API_PORT and Grafana credentials come from .env (see .env.example).
+
+name: duo-game-api
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        GIT_SHA: ${GIT_SHA:-unknown}
+    image: ${API_IMAGE:-duo-game-api:local}
+    env_file:
+      - env/dev.env
+    ports:
+      - "${API_PORT:-8000}:8000"
+    # Hardening: the service only reads baked-in files, so the root filesystem can be
+    # read-only and every Linux capability can be dropped.
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v3.15.1@sha256:fa3302279710be2f21a8301ec17a8b4f2301fd829bd113839b3b6b02b6f191a2
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=7d
+    volumes:
+      - ./deploy/prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:13.0.2@sha256:5dad0df181cb644a14e13617b913b261a54f7d4fd4510721dba420929f35bea2
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-change-me-locally}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/duo-game-api.json
+    volumes:
+      - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./deploy/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  grafana-data:

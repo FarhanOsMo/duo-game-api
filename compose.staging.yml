@@ -1,0 +1,6 @@
+# Staging override: same image as dev, staging configuration.
+# Usage: docker compose -f docker-compose.yml -f compose.staging.yml up -d
+services:
+  api:
+    env_file: !override
+      - env/staging.env

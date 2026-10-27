@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# One-command setup for macOS, Linux and Git Bash on Windows:
+# checks prerequisites, creates .env from the template, starts the stack and
+# smoke-tests it. Safe to run repeatedly: every step is idempotent.
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+fail() { echo "ERROR: $*" >&2; exit 1; }
+
+command -v docker >/dev/null 2>&1 || fail "Docker is not installed (https://docs.docker.com/get-docker/)"
+docker compose version >/dev/null 2>&1 || fail "Docker Compose v2 is required ('docker compose')"
+docker info >/dev/null 2>&1 || fail "Docker is installed but not running; start Docker Desktop"
+
+PYTHON=""
+for candidate in python3 python py; do
+  if command -v "$candidate" >/dev/null 2>&1; then PYTHON="$candidate"; break; fi
+done
+[ -n "$PYTHON" ] || fail "Python 3.12+ is required for the smoke test"
+
+if [ ! -f .env ]; then
+  cp .env.example .env
+  echo "Created .env from .env.example"
+else
+  echo ".env already exists; leaving it unchanged"
+fi
+
+GIT_SHA="$(git rev-parse --short HEAD 2>/dev/null || echo unknown)"
+export GIT_SHA
+docker compose up -d --build
+
+"$PYTHON" scripts/smoke_test.py --timeout 90
+
+cat <<EOF
+
+Stack is up:
+  API         http://localhost:8000/docs
+  Prometheus  http://localhost:9090
+  Grafana     http://localhost:3000   (login from .env: GRAFANA_ADMIN_USER / GRAFANA_ADMIN_PASSWORD)
+Stop it with: docker compose down
+EOF

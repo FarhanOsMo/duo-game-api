@@ -1,0 +1,12 @@
+# Loads every dashboard JSON committed under deploy/grafana/dashboards.
+# UI edits are disabled: dashboards change through pull requests, like code.
+apiVersion: 1
+
+providers:
+  - name: duo-game-api
+    folder: Duo Game API
+    type: file
+    allowUiUpdates: false
+    disableDeletion: true
+    options:
+      path: /var/lib/grafana/dashboards

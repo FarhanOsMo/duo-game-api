@@ -1,0 +1,42 @@
+# Alerts fire on symptoms players and tools would notice (down, failing, slow),
+# not on causes such as CPU. Each has a `for:` window so a single bad scrape or
+# a brief spike does not page anyone. Thresholds are tested in tests/alerts_test.yml.
+groups:
+  - name: duo-game-api
+    rules:
+      - alert: ApiDown
+        expr: up{job="duo-game-api"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Duo Game API is down"
+          description: "Prometheus has failed to scrape {{ $labels.instance }} for over 1 minute."
+
+      - alert: HighErrorRate
+        # Ratio of 5xx responses to all responses. The `> 0` guard on the denominator
+        # keeps the expression empty (not NaN) when there is no traffic at all.
+        expr: |
+          sum(rate(http_requests_total{job="duo-game-api", status=~"5.."}[5m]))
+            /
+          (sum(rate(http_requests_total{job="duo-game-api"}[5m])) > 0)
+            > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "More than 5% of requests are failing"
+          description: "5xx ratio is {{ $value | humanizePercentage }} over the last 5 minutes."
+
+      - alert: HighLatencyP95
+        # Every endpoint is in-memory; 250 ms at p95 means something is badly wrong.
+        expr: |
+          histogram_quantile(0.95,
+            sum by (le) (rate(http_request_duration_seconds_bucket{job="duo-game-api"}[5m]))
+          ) > 0.25
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "p95 latency above 250 ms"
+          description: "p95 latency is {{ $value | humanizeDuration }} over the last 5 minutes."

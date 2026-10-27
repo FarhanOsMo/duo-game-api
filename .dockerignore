@@ -1,0 +1,9 @@
+# Allow-list style: the image needs only requirements.txt, app/ and data/.
+# Everything else (tests, docs, git history, local env files) stays out, which
+# keeps the build context small and guarantees no .env is ever baked in.
+*
+!requirements.txt
+!app/
+!data/
+**/__pycache__
+**/*.pyc

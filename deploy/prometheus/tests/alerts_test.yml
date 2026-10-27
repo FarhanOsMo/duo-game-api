@@ -1,0 +1,97 @@
+# Unit tests for the alert rules, run with:
+#   promtool test rules deploy/prometheus/tests/alerts_test.yml
+# Alerts are code, so they get tests: each rule is proven to fire on the symptom
+# and to stay quiet on healthy traffic.
+rule_files:
+  - ../alerts.yml
+
+evaluation_interval: 1m
+
+tests:
+  - name: API down fires after one minute
+    interval: 1m
+    input_series:
+      - series: 'up{job="duo-game-api", instance="api:8000"}'
+        values: "1 0 0 0"
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: ApiDown
+        exp_alerts: []
+      - eval_time: 3m
+        alertname: ApiDown
+        exp_alerts:
+          - exp_labels:
+              severity: critical
+              job: duo-game-api
+              instance: api:8000
+            exp_annotations:
+              summary: "Duo Game API is down"
+              description: "Prometheus has failed to scrape api:8000 for over 1 minute."
+
+  - name: error rate above 5 percent fires, healthy traffic does not
+    interval: 1m
+    input_series:
+      # 100 requests per minute, 10 of them 5xx (10%)
+      - series: 'http_requests_total{job="duo-game-api", status="200"}'
+        values: "0+90x20"
+      - series: 'http_requests_total{job="duo-game-api", status="500"}'
+        values: "0+10x20"
+    alert_rule_test:
+      - eval_time: 4m
+        alertname: HighErrorRate
+        exp_alerts: []
+      - eval_time: 15m
+        alertname: HighErrorRate
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+            exp_annotations:
+              summary: "More than 5% of requests are failing"
+              description: "5xx ratio is 10% over the last 5 minutes."
+
+  - name: no traffic means no error-rate alert
+    interval: 1m
+    input_series:
+      - series: 'http_requests_total{job="duo-game-api", status="200"}'
+        values: "0x20"
+    alert_rule_test:
+      - eval_time: 15m
+        alertname: HighErrorRate
+        exp_alerts: []
+
+  - name: p95 latency above 250 ms fires
+    interval: 1m
+    input_series:
+      # Every request lands in the (0.5, 1.0] bucket, so p95 is well above 250 ms.
+      - series: 'http_request_duration_seconds_bucket{job="duo-game-api", le="0.25"}'
+        values: "0x30"
+      - series: 'http_request_duration_seconds_bucket{job="duo-game-api", le="0.5"}'
+        values: "0x30"
+      - series: 'http_request_duration_seconds_bucket{job="duo-game-api", le="1"}'
+        values: "0+60x30"
+      - series: 'http_request_duration_seconds_bucket{job="duo-game-api", le="+Inf"}'
+        values: "0+60x30"
+    alert_rule_test:
+      - eval_time: 8m
+        alertname: HighLatencyP95
+        exp_alerts: []
+      - eval_time: 20m
+        alertname: HighLatencyP95
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+            exp_annotations:
+              summary: "p95 latency above 250 ms"
+              description: "p95 latency is 975ms over the last 5 minutes."
+
+  - name: fast traffic keeps latency alert quiet
+    interval: 1m
+    input_series:
+      - series: 'http_request_duration_seconds_bucket{job="duo-game-api", le="0.005"}'
+        values: "0+60x30"
+      - series: 'http_request_duration_seconds_bucket{job="duo-game-api", le="+Inf"}'
+        values: "0+60x30"
+    alert_rule_test:
+      - eval_time: 20m
+        alertname: HighLatencyP95
+        exp_alerts: []

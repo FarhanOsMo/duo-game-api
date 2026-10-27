@@ -93,3 +93,43 @@ would turn a typo (`?attack=Fier`) into a plausible but wrong answer.
 **Resolution.** The pure domain function keeps the game's behaviour (and is
 tested for it), while `/elements/effectiveness` returns a 404 for names not in
 `elements.json`. The decision is commented in `app/api/compute.py`.
+
+## P4: containers and observability
+
+### Alert-rule unit test compared annotations too
+`promtool test rules` failed for `HighLatencyP95` even though the alert fired
+correctly (p95 975 ms): promtool compares expected annotations exactly, and
+the test case listed only labels.
+
+**Resolution.** Added the expected `summary` and `description` to the test
+case. All five alert-rule test cases now pass, including the ones proving
+that healthy traffic and zero traffic do not fire.
+
+### Grafana logged an error for a missing alerting folder
+Grafana 13 logged `can't read alerting provisioning files from directory
+... /etc/grafana/provisioning/alerting: no such file or directory` at every
+start, even though alerting is intentionally done in Prometheus.
+
+**Resolution.** Added `deploy/grafana/provisioning/alerting/` with a README
+(Grafana only reads `.yaml` files there) explaining that Prometheus is the
+single source of truth for alerts. Restarted Grafana and confirmed the error
+no longer appears.
+
+### Dashboard stat panels lost their units
+The first real screenshot showed the p95 stat as `0.00465` and the 5xx stat
+as a bare `0`. The script that generates the dashboard JSON replaced each
+panel's `fieldConfig.defaults` when adding thresholds, which dropped the
+`unit` setting.
+
+**Resolution.** The generator now merges threshold settings into the
+existing defaults. The regenerated dashboard shows `4.67 ms` and `0%`, and
+the screenshot in `docs/images/` was retaken from the running stack.
+
+### Taking a real screenshot without a manual login
+Grafana requires a login, and a headless browser cannot complete one.
+
+**Resolution.** For the screenshot only, Grafana was restarted with a
+throwaway Compose override (kept outside the repo) that enables read-only
+anonymous viewing, captured with headless Chrome in kiosk mode while
+`scripts/generate_traffic.py` ran, and then restarted from the committed
+configuration. A follow-up request confirmed anonymous access was off again.

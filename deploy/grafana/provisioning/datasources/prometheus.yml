@@ -1,0 +1,12 @@
+# Provisioned at startup so the dashboard works with zero manual clicks.
+# A fixed uid lets the committed dashboard JSON reference this datasource.
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    uid: prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    editable: false
