@@ -1,0 +1,39 @@
+# Dependabot opens pull requests for outdated or vulnerable dependencies, so
+# upgrades go through the same CI gates as any other change. Weekly and grouped
+# to keep the PR volume manageable for a small team.
+version: 2
+
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      python-dependencies:
+        patterns: ["*"]
+    commit-message:
+      prefix: "build(deps)"
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "build(docker)"
+
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "build(compose)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci(deps)"

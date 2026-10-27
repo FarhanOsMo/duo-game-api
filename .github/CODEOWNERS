@@ -1,0 +1,10 @@
+# Every path needs a code owner's approval before merging to main.
+# Replace <your-username> with your GitHub username after creating the repo.
+*                     @<your-username>
+
+# Called out separately so ownership can be split as the team grows:
+# game data and formulas (balance), pipeline, and observability.
+/data/                @<your-username>
+/app/domain/          @<your-username>
+/.github/             @<your-username>
+/deploy/              @<your-username>

@@ -1,0 +1,150 @@
+# Release pipeline: tag -> same CI gates -> publish image -> staging -> approval -> production.
+#
+# Triggered by pushing a semantic version tag (git tag v1.0.0 && git push origin v1.0.0).
+# The image is built ONCE, pushed to GitHub Container Registry, and then promoted
+# by digest. Staging and production run that identical image with different env
+# files, so what was tested is exactly what ships.
+#
+# "Deploy" here starts the Compose stack on the GitHub runner and smoke-tests it.
+# That is a faithful rehearsal of the promotion flow at zero cost; docs/DEPLOYMENT.md
+# describes how the same jobs would target a real cluster.
+
+name: Release
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Re-run CI gates on the tag
+    uses: ./.github/workflows/ci.yml
+
+  publish:
+    name: Publish image to GHCR
+    needs: verify
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # create the GitHub Release and attach the data manifest
+      packages: write # push to ghcr.io
+    outputs:
+      image: ${{ steps.names.outputs.image }}
+      digest: ${{ steps.build.outputs.digest }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Check tag matches app version
+        # Prevents publishing v1.2.0 of an image whose /meta still says 1.1.0.
+        run: |
+          app_version=$(python3 -c "import re; print(re.search(r'__version__ = \"(.+)\"', open('app/__init__.py').read()).group(1))")
+          if [ "v${app_version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match app version ${app_version}"; exit 1
+          fi
+
+      - name: Compute image name
+        id: names
+        # Registry paths must be lowercase; GitHub usernames may not be.
+        run: echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Image tags and labels
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ${{ steps.names.outputs.image }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=sha,format=short,prefix=sha-
+
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+            APP_VERSION=${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Create GitHub Release with the data manifest
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          files: data/manifest.json
+          generate_release_notes: true
+          body: |
+            Image: `${{ steps.names.outputs.image }}@${{ steps.build.outputs.digest }}`
+            The attached `manifest.json` identifies the exact game data baked into this image.
+
+  deploy-staging:
+    name: Deploy to staging
+    needs: publish
+    runs-on: ubuntu-24.04
+    environment: staging
+    permissions:
+      contents: read
+      packages: read
+    env:
+      API_IMAGE: ${{ needs.publish.outputs.image }}@${{ needs.publish.outputs.digest }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start staging with the released image
+        run: |
+          cp .env.example .env
+          docker compose -f docker-compose.yml -f compose.staging.yml up -d --no-build
+      - name: Smoke test staging
+        run: python3 scripts/smoke_test.py --timeout 90
+      - name: Tear down
+        if: always()
+        run: docker compose down -v
+
+  deploy-production:
+    name: Deploy to production
+    needs: [publish, deploy-staging]
+    runs-on: ubuntu-24.04
+    # The "production" environment has required reviewers configured in repo
+    # settings, so this job waits for a human approval before it starts.
+    environment: production
+    permissions:
+      contents: read
+      packages: read
+    env:
+      API_IMAGE: ${{ needs.publish.outputs.image }}@${{ needs.publish.outputs.digest }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Start production with the released image
+        run: |
+          cp .env.example .env
+          docker compose -f docker-compose.yml -f compose.prod.yml up -d --no-build
+      - name: Smoke test production
+        run: python3 scripts/smoke_test.py --timeout 90
+      - name: Tear down
+        if: always()
+        run: docker compose down -v

@@ -133,3 +133,55 @@ throwaway Compose override (kept outside the repo) that enables read-only
 anonymous viewing, captured with headless Chrome in kiosk mode while
 `scripts/generate_traffic.py` ran, and then restarted from the committed
 configuration. A follow-up request confirmed anonymous access was off again.
+
+## P5: CI/CD and security scanning
+
+### Pinning actions to commit SHAs
+Tags on third-party actions can be moved by whoever controls the action's
+repository, so a tag is not an immutable reference. Two of the release tags
+(`aquasecurity/trivy-action` v0.36.0 and `softprops/action-gh-release` v3.0.3)
+turned out to be annotated tags whose object SHA is the tag, not the commit.
+
+**Resolution.** Resolved every action's latest release through the GitHub API
+and dereferenced annotated tags to their commit SHAs. Workflows reference the
+commit SHA with the version as a comment; Dependabot updates both.
+
+### Trivy findings in the base image
+Trivy 0.76.1 reported 44 HIGH/CRITICAL CVEs in the Debian 13.7 packages of the
+`python:3.12.16-slim-trixie` base image, none of which has a fixed package
+available. Python dependencies were clean.
+
+**Resolution.** The gate fails only on HIGH/CRITICAL findings that have a fix
+(`ignore-unfixed: true`): those are actionable by updating, while unfixed ones
+cannot be resolved from this repository and would block every build. The full
+list is still printed in the CI log. Moving to a distroless or minimal base
+image is listed as future work. pip was also removed from the runtime
+virtualenv to shrink the scan surface.
+
+### Windows wrote CRLF into a generated file
+The pre-commit `mixed-line-ending` hook rejected the generated Grafana
+dashboard: Python's stdout on Windows translates `\n` to `\r\n` when output
+is redirected to a file.
+
+**Resolution.** The hook normalised the file to LF, and `.gitattributes`
+(`* text=auto eol=lf`) already guaranteed the committed copy was LF, which is
+why `git diff` showed no change. Generated files in this repo are now written
+with explicit `newline="\n"`.
+
+### Local pre-commit hooks depended on the active shell
+The data-validation hooks first used `language: system`, so they ran whatever
+`python` was on PATH at commit time; outside the virtualenv that interpreter
+had no pydantic and the hook would fail.
+
+**Resolution.** Switched them to `language: python` with
+`additional_dependencies: [pydantic==2.14.1]`, so pre-commit builds an
+isolated environment and the hooks behave the same from any terminal.
+
+### Verifying the pipeline without pushing
+The repository is not on GitHub yet, so the workflows cannot run there.
+
+**Resolution.** Every gate was run locally with the same pinned tool versions:
+actionlint 1.7.12 (clean), gitleaks 8.30.1 over the git history (no leaks),
+Trivy 0.76.1 against the built image (exit 0 under the CI policy), pip-audit
+(no known vulnerabilities) and all pre-commit hooks. The GitHub-only parts
+(GHCR push, environments, approval gate) are verified on the first real run.
