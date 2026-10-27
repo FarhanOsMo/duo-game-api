@@ -30,3 +30,7 @@ Thumbs.db
 
 # The portfolio PDF is a class upload built by scripts/build_pdf.py, not a repo artefact
 Mohamed_Farhan_Portfolio.pdf
+
+# Personal presentation notes are kept outside the repo; never commit them if moved here
+PRESENTATION_SCRIPT.md
+HOW_TO_UPDATE_GAME_DATA.md
