@@ -66,13 +66,16 @@ Pull requests into `main` must pass every CI job before merging:
 | `Lint workflows (actionlint)` | GitHub Actions syntax and shell scripts |
 | `Build, scan and smoke test image` | Docker build, Trivy (fixable HIGH/CRITICAL), Compose smoke test |
 
-At least one approving review from a code owner is also required.
+While the project has a single maintainer, GitHub does not allow approving your own
+pull request, so the required approval count is 0. Raise it to 1, with code owner
+review, as soon as a second maintainer joins.
 
 ## Branch protection (repository settings)
 
 Settings > Branches > Add branch ruleset (or classic rule) for `main`:
 
-1. Require a pull request before merging, with 1 approval and code owner review.
+1. Require a pull request before merging (0 approvals while solo; 1 with code owner
+   review once there is a second maintainer). Require conversations to be resolved.
 2. Require status checks to pass: select the four checks above. Require
    branches to be up to date before merging.
 3. Block force pushes and block deletions.

@@ -18,8 +18,9 @@ flowchart LR
    rules, starts on a short-lived branch. CI runs lint, strict typing, data
    validation, the manifest check, tests with a coverage gate, pip-audit,
    gitleaks, actionlint, a Docker build, a Trivy scan and a Compose smoke test.
-2. **Merge to main.** Branch protection requires those checks and a code
-   owner's review. `main` is always releasable.
+2. **Merge to main.** Branch protection requires a pull request and those checks
+   (plus a code owner's review once there is a second maintainer). `main` is
+   always releasable.
 3. **Tag.** `git tag v1.0.0 && git push origin v1.0.0` starts
    `.github/workflows/release.yml`. The tag must match `app/__init__.py`.
 4. **Publish.** The release workflow re-runs every CI gate on the tagged
@@ -97,8 +98,9 @@ After creating the repository:
    `production` > tick **Required reviewers**, add yourself, and Save
    protection rules.
 2. **Branch protection.** Settings > Branches (or Settings > Rules > Rulesets)
-   > add a rule for `main`: require a pull request before merging (1 approval,
-   code owner review), require status checks to pass (`Lint, types, data and
+   > add a rule for `main`: require a pull request before merging (0 approvals
+   while solo, since GitHub does not allow self-approval; 1 with code owner review
+   once a second maintainer joins), require status checks to pass (`Lint, types, data and
    tests`, `Dependency audit and secret scan`, `Lint workflows (actionlint)`,
    `Build, scan and smoke test image`), and block force pushes.
 3. **Package visibility.** After the first release, the image appears under
