@@ -52,6 +52,9 @@ services:
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-change-me-locally}
       GF_USERS_ALLOW_SIGN_UP: "false"
       GF_ANALYTICS_REPORTING_ENABLED: "false"
+      # Grafana 13 otherwise tries to download and install bundled plugins at startup;
+      # the dashboard uses only core panels, and the stack should not need the internet.
+      GF_PLUGINS_PREINSTALL_DISABLED: "true"
       GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: /var/lib/grafana/dashboards/duo-game-api.json
     volumes:
       - ./deploy/grafana/provisioning:/etc/grafana/provisioning:ro
